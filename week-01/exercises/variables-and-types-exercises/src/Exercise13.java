@@ -11,5 +11,13 @@ public class Exercise13 {
         // 3. Print the result.
         // 4. Change the values of purchaseQuantity and hasCoupon to get both true and false results for hasDiscount
         // in different ways.
+
+        boolean hasDiscount;
+        hasDiscount = (purchaseQuantity >= 6) || hasCoupon;
+        System.out.println("Has discount: " + hasDiscount);
+        purchaseQuantity = 8;
+        hasCoupon = false;
+        hasDiscount = (purchaseQuantity >= 6) || hasCoupon;
+        System.out.println("Has discount: " + hasDiscount);
     }
 }
