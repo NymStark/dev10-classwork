@@ -20,5 +20,16 @@ public class Exercise06 {
         int shopperCount = Integer.parseInt(console.nextLine());
 
         // 1. Apply if/else here.
+
+        if (snorkelerCount%2 ==0){
+            System.out.println("Hooray! Everyone who wants to gets to snorkel! Glub glub!");
+        } else {
+            shopperCount += snorkelerCount;
+            snorkelerCount = 0;
+            System.out.println("NOBODY SNORKELS!!! SPEND YO MONEY");
+        }
+
+        System.out.println("Total Shoppers: " + shopperCount);
+        System.out.println("Total Snorkelers: " + snorkelerCount);
     }
 }

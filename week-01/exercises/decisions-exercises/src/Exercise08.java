@@ -17,6 +17,12 @@ public class Exercise08 {
             opposite = "hot";
         } else if (word.equalsIgnoreCase("little")) {
             opposite = "big";
+        } else if (word.equalsIgnoreCase("day")) {
+            opposite = "night";
+        } else if (word.equalsIgnoreCase("smart")) {
+            opposite = "stupid";
+        } else if (word.equalsIgnoreCase("kind")) {
+            opposite = "obnoxious";
         }
 
         if (opposite == null) {
