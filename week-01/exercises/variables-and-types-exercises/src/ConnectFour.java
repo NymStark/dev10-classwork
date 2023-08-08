@@ -18,7 +18,7 @@ public class ConnectFour {
         return scanner.nextLine();
     }
 
-    static void playGame() { //game play
+    static void playGame(String playerOne, String playerTwo, Scanner scanner) { //game play
         /*
         1. init and print board
         2. init player 1 turn, init X for player 1 symbol
@@ -34,7 +34,9 @@ public class ConnectFour {
 
     }
 
-    static void playAgain(){ // prompts the user with a y/n to play again
+    static boolean playAgain(Scanner scanner){ // prompts the user with a y/n to play again
+        System.out.print("Play Again? [y/n]: ");
+        return scanner.next().equalsIgnoreCase("y"); // returns true if y,
 
     }
 
