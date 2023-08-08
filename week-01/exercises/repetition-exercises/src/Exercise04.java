@@ -18,5 +18,11 @@ public class Exercise04 {
         // start - the starting value
         // end - controls the loop condition, the loop continues while the value is less than or equal to end
         // increment - the number to add after each loop
+
+        //Code does not go both ways! sad faces all around.
+
+        for (int i = start; i <= end; i+=increment) {
+            System.out.println(i);
+        }
     }
 }

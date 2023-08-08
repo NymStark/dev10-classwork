@@ -10,12 +10,14 @@ public class Exercise08 {
         // The transformation from `while` to `do/while` should not change behavior.
 
         System.out.println("Enter a name (Required): ");
-        String name = console.nextLine();
+        String name;
 
-        while (name.isBlank()) {
-            System.out.println("Enter a name (Required): ");
+        do {
             name = console.nextLine();
-        }
+            if (name.isBlank()) {
+                System.out.println("Enter a name (Required): ");
+            }
+        } while (name.isBlank());
 
         System.out.println("Name: " + name);
     }
