@@ -40,9 +40,11 @@ public class KnockKnockJoke {
             case "null":
                 System.out.println("Null who? ");
                 System.out.println("Null point exception - my jokes are a bit null sometimes!");
+                break;
 
             default:
                 System.out.println("I don't know you.");
+                break;
         }
     }
 }

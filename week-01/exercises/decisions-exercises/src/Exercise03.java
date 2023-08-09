@@ -9,6 +9,7 @@ public class Exercise03 {
 
         System.out.print("Enter a whole number: ");
         String input = console.nextLine();
+        //String input = console.next();
         int value = Integer.parseInt(input);
 
         if (value >= 10 && value < 26) {
