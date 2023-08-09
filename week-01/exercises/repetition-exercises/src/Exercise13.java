@@ -21,5 +21,15 @@ public class Exercise13 {
         // " " -> "  " (but whitespace should be doubled)
         // "open & shut" -> "ooppeenn  &&  sshhuutt"
         // "Eep" -> "EEeepp"
+
+        String doublePhrase ="";
+        for (int i = 0; i < phrase.length(); i++) {
+            char curChar = phrase.charAt(i);
+            doublePhrase += curChar;
+            doublePhrase += curChar;
+        }
+
+        System.out.println("Double the fun! : " + doublePhrase );
+
     }
 }
