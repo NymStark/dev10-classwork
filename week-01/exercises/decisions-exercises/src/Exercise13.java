@@ -21,5 +21,20 @@ public class Exercise13 {
         //    ury     curry       no
         //    mer   Mercury       no (case sensitive)
         // 2. As a stretch goal, display the location (index) of needle in haystack.
+
+        // methods: contains()  :   Runs through a string to check if a specific sequence of characters exists within a larger string
+        //          indexOf()   :   Also a member of the String class (in Java). It locates the index of a specific substring within a given string.
+        //                          It returns the index of the first occurrence of the specified substring, else -1
+
+        if (haystack.contains(needle)) {
+            System.out.println("Haystack contains the needle.");
+
+            // Display the index of needle in haystack
+            int index = haystack.indexOf(needle);
+            System.out.println("The needle is found at index: " + index);
+        } else {
+            System.out.println("Haystack does not contain the needle.");
+        }
+
     }
 }

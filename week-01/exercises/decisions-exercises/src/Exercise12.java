@@ -18,5 +18,15 @@ public class Exercise12 {
 
         // 1. Add decisions statements to determine if first, second, and third are in order.
         // 2. Print messages for both ordered and unordered cases.
+
+        if (first == second && second == third) {
+            System.out.println("The numbers are equal.");
+        } else if (first <= second && second <= third) {
+            System.out.println("The numbers are in ascending order.");
+        } else if (first >= second && second >= third) {
+            System.out.println("The numbers are in descending order.");
+        } else {
+            System.out.println("The numbers are not in order.");
+        }
     }
 }
