@@ -5,10 +5,16 @@ public class Exercise01 {
         String firstCompliment = getRandomCompliment();
         System.out.println(firstCompliment);
 
+
         // Call the getRandomCompliment method two more times.
         // 1. Store the result in a new string variable.
         // 2. Print the result.
         // 3. Print the value returned directly without an intermediate variable.
+
+        String secondCompliment = getRandomCompliment();
+        System.out.println(secondCompliment);
+
+        System.out.println(getRandomCompliment());
     }
 
     public static String getRandomCompliment() {
@@ -36,6 +42,6 @@ public class Exercise01 {
                 return "Really, really great.";
         }
 
-        return ""; // Should never happen.
+        return ""; //Should never happen
     }
 }

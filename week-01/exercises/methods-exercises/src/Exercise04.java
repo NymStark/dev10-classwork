@@ -12,6 +12,15 @@ public class Exercise04 {
     // 1. Complete getFirstVowel.
     // If no vowel is found, return 0. (As a char, 0 represents the NULL value.)
     public static char getFirstVowel(String value) {
-        return 0;
+        int i = 0;
+        while (i < value.length()) {
+            char cur = value.charAt(i);
+            if (cur == 'a' || cur == 'e' || cur == 'i' || cur == 'o' || cur == 'u' ||
+                    cur == 'A' || cur == 'E' || cur == 'I' || cur == 'O' || cur == 'U') {
+                return cur; // Return the first vowel found.
+            }
+            i++;
+        }
+        return 0; // Return 0 if no vowel is found.
     }
 }
