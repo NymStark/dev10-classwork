@@ -1,7 +1,14 @@
+import java.sql.SQLOutput;
+
 public class Exercise09 {
 
     public static void main(String[] args) {
         // 2. Call your method in various ways to test it here.
+        printBox(8,10);
+        System.out.println();
+        printBox(4, 4);
+        System.out.println();
+        printBox(12, 5);
     }
 
     // 1. Create a method.
@@ -23,4 +30,13 @@ public class Exercise09 {
     // ####
     // ####
     // ####
+
+    public static void printBox( int rows, int columns) {
+        for (int i = 0; i < rows; i ++) {
+            for (int j = 0; j < columns; j++){
+                System.out.print("#");
+            }
+            System.out.println();
+        }
+    }
 }

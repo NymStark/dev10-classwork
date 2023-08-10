@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Exercise12 {
 
     // 1. Create a method.
@@ -20,8 +22,35 @@ public class Exercise12 {
 
     public static void main(String[] args) {
         // 3. Uncomment the code below and confirm it works.
-        // printNounPhrase();
-        // printNounPhrase();
-        // printNounPhrase();
+         printNounPhrase();
+         printNounPhrase();
+         printNounPhrase();
+    }
+
+    public static String readRequiredString(String prompt) {
+        Scanner console = new Scanner(System.in);
+        String result;
+        do {
+            System.out.print(prompt);
+            result = console.nextLine().trim(); //trims off white spaces afterwards
+
+            if (result.isEmpty()) {
+                System.out.println("You didn't enter anything. Please try again.");
+            } else if (!isValidInput(result)) {
+                System.out.println("Invalid input. Please enter letters and numbers only.");
+            }
+        } while (!isValidInput(result));
+        return result;
+    }
+
+    public static boolean isValidInput(String input) {
+        return input.matches("[a-zA-Z0-9]+"); //this is so wild.
+    }
+
+    public static void printNounPhrase(){
+        String adjective = readRequiredString("Enter an adjective: ");
+        String noun = readRequiredString("Enter a noun: ");
+        String nounPhrase = adjective + " " + noun;
+        System.out.println("Noun phrase: " + nounPhrase);
     }
 }
