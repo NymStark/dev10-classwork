@@ -28,5 +28,22 @@ public class Exercise18 {
         // "orange", 15, 25 -> "orange" (ignore when start and end are bigger than the length of the phrase)
         // "one two three", 4, 7 -> "one three"
         // "interrupting moooo cow", 12, 17 -> "interrupting cow"
+
+        //why is a loop needed?
+        if (start < 0 || end < 0 || start > end || start >= phrase.length() || end >= phrase.length()) { //input validation.
+            System.out.println("Invalid input. Cannot perform cutting.");
+            return;
+        }
+        String result = phrase.substring(0, start) + phrase.substring(end +1 );
+        System.out.println("The result is: " + result);
+
+        //You can obviously also use concatenation, it's just slightly inefficient.
+        String secondResult ="";
+        for (int i = 0; i < phrase.length(); i++) {
+            if (i < start || i > end) {
+                secondResult += phrase.charAt(i);
+            }
+        }
+        System.out.println("Another way gives the result of: " + secondResult);
     }
 }

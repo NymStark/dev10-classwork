@@ -24,5 +24,26 @@ public class Exercise19 {
         // "B", "igstar" -> "Bigstar"
         // "", "huh?" -> "huh?"
         // "wha?", "" -> "wha?"
+
+        //compare the two strings to see which is shorter
+        //interleave until the shorter one has run out
+        //append the rest of the characters
+
+        int minLength = Math.min(first.length(), second.length());
+        String res = "";
+
+        for (int i = 0; i < minLength; i++) {
+            res += first.charAt(i);
+            res += second.charAt(i);
+        }
+
+        if (first.length() > second.length()) {
+            res += first.substring(minLength);
+        } else if (second.length() > first.length()) {
+            res += second.substring(minLength);
+        }
+
+        System.out.println("Interleaved String: " + res);
+
     }
 }
