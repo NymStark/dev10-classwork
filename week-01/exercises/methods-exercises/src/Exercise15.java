@@ -50,8 +50,8 @@ public class Exercise15 {
             input = scanner.nextInt();
         } while (input<= 0);
 
-
         fizzBuzz(input);
+        scanner.close();
 
     }
 
