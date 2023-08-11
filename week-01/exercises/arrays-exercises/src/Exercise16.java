@@ -4,8 +4,42 @@ public class Exercise16 {
 
     public static void main(String[] args) {
         // MERGE
-        int[] one = makeRandomAscendingArray();
-        int[] two = makeRandomAscendingArray();
+        int[] one = makeRandomAscendingArray(); //first random ascending array
+        int[] two = makeRandomAscendingArray(); //second random ascending array.
+
+        int lenOne = one.length;
+        int lenTwo = two.length;
+        int[] result = new int[lenOne+lenTwo];
+
+        int oneIndex = 0;
+        int twoIndex = 0;
+        int resultIndex = 0;
+        while (resultIndex < result.length) {
+            if (oneIndex<lenOne && ( twoIndex >= lenTwo || one[oneIndex]<= two[twoIndex])){ // iterates through one, while one[] is smaller than two[]
+                result[resultIndex] = one[oneIndex];
+                oneIndex++;
+            } else if ( twoIndex<lenTwo) { // iterates through two.
+                result[resultIndex] = two[twoIndex];
+                twoIndex++;
+            }
+            resultIndex++;
+        }
+        System.out.println("Array One: ");
+        for (int num : one) {
+            System.out.print(num + "->");
+        }
+
+        System.out.println();
+        System.out.println("Array Two: ");
+        for (int num : two) {
+            System.out.print(num + "->");
+        }
+
+        System.out.println();
+        System.out.println("Merged Array!: ");
+        for (int num : result) {
+            System.out.print(num + "->");
+        }
 
         // makeRandomAscendingArray creates a random array with a capacity between 50 and 150.
         // Its elements are guaranteed to be sorted ascending.
