@@ -55,7 +55,7 @@ public class HanoiCapsuleManagement {
 
     public static void initializecapsules(String[] capsules){
         for (int i=0; i < capsules.length; i++){
-            capsules[i] = "Vacant";
+            capsules[i] = "[Vacant]";
         }
     }
 
@@ -83,7 +83,7 @@ public class HanoiCapsuleManagement {
         System.out.println("===============");
         int availableRooms = 0;
         for (String capsule: capsules) {
-            if (capsule.equals("Vacant")){
+            if (capsule.equals("[Vacant]")){
                 availableRooms++;
             }
         }
@@ -101,7 +101,7 @@ public class HanoiCapsuleManagement {
         do {
             System.out.print("Enter the room the guest would prefer: ");
             preferredRoom = getPositiveInteger(scanner) - 1; //Adjusting index
-            validRoom = preferredRoom >= 0 && preferredRoom < capsules.length && capsules[preferredRoom].equals("Vacant");
+            validRoom = preferredRoom >= 0 && preferredRoom < capsules.length && capsules[preferredRoom].equals("[Vacant]");
 
             if(!validRoom){
                 System.out.println("Not available.");
@@ -130,9 +130,9 @@ public class HanoiCapsuleManagement {
             return;
         }
 
-        if (!capsules[checkOutRoom].equals("Vacant")) {
+        if (!capsules[checkOutRoom].equals("[Vacant]")) {
             String temp = capsules[checkOutRoom];
-            capsules[checkOutRoom] = "Vacant";
+            capsules[checkOutRoom] = "[Vacant]";
             System.out.println("Successfully checked " + temp + " out from room " + (checkOutRoom+1) + ".");
         } else {
             System.out.println("Cannot check out, the room is already vacant.");
@@ -146,7 +146,7 @@ public class HanoiCapsuleManagement {
         if (capsules.length <= 11) {
             System.out.println("Room Occupancy:");
             for (int i = 0; i < capsules.length; i++) {
-                System.out.println("Room " + (i + 1) + ": " + (capsules[i].equals("Vacant") ? "Vacant" : "Occupied by " + capsules[i]));
+                System.out.println("Room " + (i + 1) + ": " + (capsules[i].equals("[Vacant]") ? "Vacant" : "Occupied by " + capsules[i]));
                 //compares capsules[i] to "Vacant", option 1 returns "Vacant", option 2 returns Occupied by name of guest!
             }
         } else {
@@ -163,7 +163,7 @@ public class HanoiCapsuleManagement {
 
             System.out.println("Room Occupancy:");
             for (int i = startIndex; i <= endIndex; i++) {
-                System.out.println("Room " + (i + 1) + ": " + (capsules[i].equals("Vacant") ? "Vacant" : "Occupied by " + capsules[i]));
+                System.out.println("Room " + (i + 1) + ": " + (capsules[i].equals("[Vacant]") ? "Vacant" : "Occupied by " + capsules[i]));
             }
         }
 
@@ -178,7 +178,7 @@ public class HanoiCapsuleManagement {
         System.out.println("**Confirming Exit**");
         System.out.println("===================");
         System.out.print("Are you sure you want to exit?(y/n): ");
-        char input = scanner.next().toLowerCase().charAt(0);
+        char input = scanner.next().toLowerCase().charAt(0); // code block is designed to accept any form of y/n, regardless of whitespace.
         while (input != 'y' && input !='n' ) {
             System.out.println("Invalid input. Please enter 'y' or 'n'. ");
             System.out.print("Are you sure you want to exit?");
