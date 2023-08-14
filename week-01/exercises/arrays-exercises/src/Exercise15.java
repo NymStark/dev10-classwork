@@ -10,6 +10,14 @@ public class Exercise15 {
         // 2. Copy elements from `one` into the beginning of the array.
         // 3. Copy elements from `two` at the end of the array.
         // 4. Print the results to confirm that it worked.
+        int[] result = new int[one.length + two.length];
+        for (int i = 0; i < result.length; i++){
+            if (i < one.length) {
+                result[i] = one[i];
+            } else {
+                result[i] = two[i-one.length];
+            }
+        }
     }
 
     public static int[] makeRandomArray() {

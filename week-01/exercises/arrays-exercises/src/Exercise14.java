@@ -39,6 +39,10 @@ public class Exercise14 {
                 "cPAdBERYV@UmIcH.eDu"
         };
 
+        for (int i = 0; i < emailAddresses.length; i++) {
+            emailAddresses[i] = emailAddresses[i].toLowerCase();
+        }
+
         // The email addresses above are valid, but have inconsistent capitalization.
         // 1. Fix the capitalization. Normalize to all lowercase.
 
