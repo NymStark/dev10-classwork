@@ -2,12 +2,23 @@ public class Exercise04 {
 
     public static void main(String[] args) {
         // 1. Replace `null` with a new Vault. Initialize its balance to zero.
-        MoneyStorage storage = null;
+
 
         // 2. Run Exercise04.
         // The only output allowed is: Success!
         // For other outputs, look at the message and fix the issue.
+        MoneyStorage storage = null;
         verifyVaultRules(storage);
+
+        MoneyStorage vault1 = new Vault(0.0, "First Vault");
+        MoneyStorage vault2 = new Vault(50.0, "Second Vault");
+        MoneyStorage vault3 = new Vault(-200.0, "Third Vault");
+        MoneyStorage vault4 = new Vault(10.0, "Fourth Vault");
+
+        verifyVaultRules(vault1);
+        verifyVaultRules(vault2);
+        verifyVaultRules(vault3);
+        verifyVaultRules(vault4);
     }
 
     static void verifyVaultRules(MoneyStorage vault) {
