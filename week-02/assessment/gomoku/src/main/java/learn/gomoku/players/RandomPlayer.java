@@ -6,7 +6,7 @@ import learn.gomoku.game.Stone;
 import java.util.List;
 import java.util.Random;
 
-public class RandomPlayer implements Player {
+public class  RandomPlayer implements Player {
 
     private static String[] titles = {"Dr.", "Professor", "Chief Exec", "Specialist", "The Honorable",
             "Prince", "Princess", "The Venerable", "The Eminent"};

@@ -38,7 +38,7 @@ public class Exercise02 {
         }
     }
 
-    static void printAll(MoneyStorage[] storages){
+    public static void printAll(MoneyStorage[] storages){
         for (int i = 0; i < storages.length; i++) {
             System.out.printf("%s: %.2f%n", storages[i].getDescription(), storages[i].getBalance()); //.2f = floating number with 2 decimal places.
         }
