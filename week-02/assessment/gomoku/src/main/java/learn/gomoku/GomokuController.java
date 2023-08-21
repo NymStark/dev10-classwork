@@ -5,7 +5,6 @@ import learn.gomoku.game.Result;
 import learn.gomoku.game.Stone;
 import learn.gomoku.players.Player;
 import learn.gomoku.players.HumanPlayer;
-import learn.gomoku.players.RandomPlayer;
 
 import java.util.List;
 import java.util.Scanner;
@@ -13,13 +12,18 @@ import java.util.Scanner;
 public class GomokuController {
     private Gomoku game;
     private final Scanner scanner;
-    private Player playerOne; // Declare playerOne at the class level
-    private Player playerTwo; // Declare playerTwo at the class level
+//    private Player playerOne; // Declare playerOne at the class level
+//    private Player playerTwo; // Declare playerTwo at the class level
+//    private Player currentPlayer; //to track the current player.
 
 
     public GomokuController(Player playerOne, Player playerTwo) {
         game = new Gomoku(playerOne, playerTwo);
         scanner = new Scanner(System.in);
+//        if (Math.random() < 0.5) {
+//            game.swap(); // Switch players if playerTwo goes first
+//        }
+//        currentPlayer = playerOne;
     }
 
 
@@ -46,26 +50,27 @@ public class GomokuController {
 //        game = new Gomoku(playerOne, playerTwo);
         while (!game.isOver()) { //while the game is not over
             displayBoard(); // display the current board state
-//            Stone move = getPlayerMove(); //perform getPlayermove to obtain the Stone object
-//            This is a mistake, you need to account for RandomPlayer as well.
-            Stone move;
-            if (game.getCurrent() instanceof HumanPlayer) {
-                move = getPlayerMove();
-            } else {
-                move = game.getCurrent().generateMove(game.getStones());
-                //game.getCurrent = current player.
-                //generateMove - generating move for RandomPlayer to the List getStones()
-            }
+            Stone move = getPlayerMove(); //perform getPlayermove to obtain the Stone object
 
-             game.place(move); //place the move.
+//            if (game.getCurrent() instanceof HumanPlayer) {
+//                move = getPlayerMove();
+//            } else {
+//                move = game.getCurrent().generateMove(game.getStones());
+//                //game.getCurrent = current player.
+//                //generateMove - generating move for RandomPlayer to the List getStones()
+//            }
+
+             Result result = game.place(move); //place the move.
+//            if (!result.isSuccess()){
+//                System.out.println(result.getMessage() + " Invalid move, row: " + (move.getRow()+1) + " column: " + (move.getColumn()+1) );
+//            }
         }
 
         displayBoard();
         Player winner = game.getWinner();
         if (winner != null) {
             System.out.println(winner.getName() + " wins!");
-        }
-        else {
+        } else {
             System.out.println("It's a draw!");
         }
         if (askToPlayAgain()) {
@@ -143,7 +148,7 @@ public class GomokuController {
 
         // printing out the board with two digit numbers instead of single, for alignment purposes.
         // Column numbers
-
+        System.out.println();
         System.out.print("  ");
         for (int i = 0; i < Gomoku.WIDTH; i++) {
             System.out.print(String.format("%02d ", i + 1));
@@ -160,18 +165,17 @@ public class GomokuController {
             }
             System.out.println();
         }
-
-
     }
 
 
-    private Stone getPlayerMove() {
-        Player currentPlayer = game.getCurrent();
-        System.out.println(currentPlayer.getName() + " to move.");
-        boolean validMove = false;
+    private Stone getHumanPlayerMove() {
+        //initially thought this was just wrong, but it gets the player to input the move, combined to getPlayerMove().
+      //  Player currentPlayer = game.getCurrent();
+//        System.out.println(currentPlayer.getName() + " to move.");
+
         Stone move = null;
 
-        while (!validMove) {
+        while (move==null) {
             try {
                 System.out.print("Enter row: ");
                 int row = Integer.parseInt(scanner.nextLine()) - 1;
@@ -179,22 +183,36 @@ public class GomokuController {
                 int column = Integer.parseInt(scanner.nextLine()) - 1;
 
                 move = new Stone(row, column, game.isBlacksTurn());
-                // if valid inputs, initialize the stone, then checks to see if the move is valid.
-                // running into issues of not being able to access isValid.
-                // game.place(move).isSuccess is a method that I can use, it took many hours to figure this out.
-
                 Result result = game.place(move);
-                if (result.isSuccess()) {
-                    validMove = true; //if the move is valid, exit the loop.
-                } else {
-                    //else print the error message and continue.
+                if (!result.isSuccess()) {
                     System.out.println(result.getMessage());
+                    move = null;
                 }
 
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input, please enter valid inputs.");
             }
         }
+        return move;
+    }
+
+    private Stone getPlayerMove() {
+        Player currentPlayer = game.getCurrent();
+        System.out.println(currentPlayer.getName() + " to move.");
+        Stone move = null;
+
+        while (move == null) {
+            if (currentPlayer instanceof HumanPlayer) {
+                move = getHumanPlayerMove();
+            } else {
+                move = currentPlayer.generateMove(game.getStones());
+            }
+
+            if (move == null) {
+                System.out.println("Invalid move.");
+            }
+        }
+
         return move;
     }
 }
