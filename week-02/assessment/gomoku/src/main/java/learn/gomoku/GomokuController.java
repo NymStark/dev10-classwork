@@ -61,9 +61,9 @@ public class GomokuController {
 //            }
 
              Result result = game.place(move); //place the move.
-//            if (!result.isSuccess()){
-//                System.out.println(result.getMessage() + " Invalid move, row: " + (move.getRow()+1) + " column: " + (move.getColumn()+1) );
-//            }
+            if (!result.isSuccess()){
+                System.out.println(result.getMessage() + " Invalid move, row: " + (move.getRow()+1) + " column: " + (move.getColumn()+1) );
+            }
         }
 
         displayBoard();
@@ -183,11 +183,12 @@ public class GomokuController {
                 int column = Integer.parseInt(scanner.nextLine()) - 1;
 
                 move = new Stone(row, column, game.isBlacksTurn());
-                Result result = game.place(move);
-                if (!result.isSuccess()) {
-                    System.out.println(result.getMessage());
-                    move = null;
-                }
+//                Result result = game.place(move);
+//                if (!result.isSuccess()) {
+//                    System.out.println(result.getMessage());
+//                    move = null;
+//                }
+                //lines above are superfluous, game.place(move) is called inside the playGame method.
 
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input, please enter valid inputs.");
