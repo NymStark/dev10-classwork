@@ -44,8 +44,32 @@ public class SolarPanelService {
     }
 
     // TODO: add an update method
+    public SolarPanelResult update(SolarPanel solarPanel) throws DataAccessException {
+        SolarPanelResult result = validate(solarPanel);
+
+        if (solarPanel != null && solarPanel.getId() <= 0) { // checking for not null, and not 0 and below.
+            result.addErrorMessage("To update there has to be a SolarPanel id.");
+        }
+        if (result.isSuccess()) { //looking for the existing solar panel in the repo based on key.
+            SolarPanel existingSolarPanel = repository.findByKey(solarPanel.getSection(),
+                    solarPanel.getRow(), solarPanel.getColumn());
+
+            if (existingSolarPanel == null || existingSolarPanel.getId() != solarPanel.getId()) { //checking for if the solarPanel exists.
+                result.addErrorMessage("SolarPanel with specified key does not exist.");
+            } else {
+                repository.update(solarPanel);
+                result.setSolarPanel(solarPanel);
+            }
+        }
+
+        return result;
+    }
+
 
     // TODO: add a delete method (possibly deleteById?)
+    public boolean deleteById(int id) throws DataAccessException {
+        return repository.deleteById(id);
+    }
 
     private SolarPanelResult validate(SolarPanel solarPanel) throws DataAccessException {
         SolarPanelResult result = new SolarPanelResult();

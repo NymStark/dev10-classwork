@@ -84,4 +84,33 @@ public class View {
 
         return result;
     }
+
+    public SolarPanel updateSolarPanel() {
+        displayHeader("Update a Panel");
+        io.println("");
+
+        SolarPanel result = new SolarPanel();
+
+        // Get section, row, and column from the view
+        String section = getSection();
+        int row = getRow();
+        int column = getColumn();
+
+        result.setSection(section);
+        result.setRow(row);
+        result.setColumn(column);
+        result.setMaterial(io.readEnum("Material", Material.class));
+        result.setYearInstalled(io.readInt("Installation Year", SolarPanelService.getMaxInstallationYear()));
+        result.setTracking(io.readBoolean("Tracked [y/n]"));
+
+        return result;
+    }
+
+    public int deleteSolarPanel() {
+        displayHeader("Delete a Panel");
+        io.println("");
+
+        return io.readInt("Enter the ID of the Panel to Delete");
+    }
+
 }

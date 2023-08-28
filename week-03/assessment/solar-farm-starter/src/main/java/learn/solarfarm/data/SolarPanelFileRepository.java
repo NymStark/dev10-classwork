@@ -48,8 +48,36 @@ public class SolarPanelFileRepository implements SolarPanelRepository {
     }
 
     // TODO: add an update method (must match with interface)
+    // Update takes an argument of a SolarPanel object, looks for the id of that object, then update
+    @Override
+    public SolarPanel update(SolarPanel solarPanel) throws DataAccessException {
+        List<SolarPanel> all = findAll(); // Load all solar panels from the file.
+        for (int i = 0; i < all.size(); i++) {
+            SolarPanel sp = all.get(i); // Gets one from the list
+            if (sp.getId() == solarPanel.getId()) { //checks if the id is the same as the updated panel.
+                all.set(i, solarPanel); //replace the solar panel at index i with solarpanel object
+                writeToFile(all);//rewrite
+                return solarPanel;
+            }
+        }
+        return null; // If the panel with the specified ID is not found.
+    }
+
 
     // TODO: add a delete method (must match with interface)
+    @Override
+    public boolean deleteById(int id) throws DataAccessException {
+        List<SolarPanel> all = findAll();
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).getId() == id) {
+                all.remove(i); // Remove the panel with the specified ID from the list.
+                writeToFile(all);
+                return true; // Return true to indicate successful deletion.
+            }
+        }
+        return false; // Else false
+    }
+
 
     private List<SolarPanel> findAll() throws DataAccessException {
         ArrayList<SolarPanel> result = new ArrayList<>();
