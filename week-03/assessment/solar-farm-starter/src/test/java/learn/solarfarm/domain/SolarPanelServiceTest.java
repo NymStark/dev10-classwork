@@ -32,6 +32,7 @@ class SolarPanelServiceTest {
     void shouldFindSolarPanelInSectionTwoRow10Column11() throws DataAccessException {
         SolarPanel solarPanel = service.findByKey("Section Two", 10, 11);
         assertNotNull(solarPanel);
+        System.out.println(solarPanel.getSection());
     }
 
     @Test
@@ -231,6 +232,7 @@ class SolarPanelServiceTest {
         solarPanel.setMaterial(Material.POLY_SI);
 
         SolarPanelResult result = service.create(solarPanel);
+        System.out.println(result);
 
         assertTrue(result.isSuccess());
     }
@@ -238,6 +240,32 @@ class SolarPanelServiceTest {
     @Test
     void shouldNotUpdateEmptySection() throws DataAccessException {
        // TODO: complete
+        //Gotta practice
+//        SolarPanel solarPanel = new SolarPanel();
+//        solarPanel.setSection("Section One");
+//        solarPanel.setRow(5);
+//        solarPanel.setColumn(5);
+//        solarPanel.setYearInstalled(1920);
+//        solarPanel.setMaterial(Material.POLY_SI);
+//
+//        SolarPanelResult result = service.create(solarPanel);
+//
+//        assertTrue(result.isSuccess());
+//
+//        // Update the solar panel's section to an empty string
+//        SolarPanel updatedSolarPanel = new SolarPanel();
+//        updatedSolarPanel.setSection(""); // Set the section to an empty string.
+//        updatedSolarPanel.setRow(7);
+//        updatedSolarPanel.setColumn(7);
+//        updatedSolarPanel.setYearInstalled(2020);
+//        updatedSolarPanel.setMaterial(Material.POLY_SI);
+//
+//        // Act - Attempt to update the solar panel
+//        SolarPanelResult updateResult = service.update(updatedSolarPanel); //currently always unsuccessful.
+//        // Assert - Ensure that the update was not successful (section cannot be empty)
+//        assertFalse(updateResult.isSuccess());
+//        // Check that the error message mentions the section field
+//        assertTrue(updateResult.getErrorMessages().get(0).contains("`section`"));
     }
 
     @Test
@@ -253,6 +281,40 @@ class SolarPanelServiceTest {
     @Test
     void shouldUpdate() throws DataAccessException {
         // TODO: complete
+
+        //Arrangement 1 - create an object in the system to access its id
+//        SolarPanel initialSolarPanel = new SolarPanel();
+//        initialSolarPanel.setSection("Section One");
+//        initialSolarPanel.setRow(5);
+//        initialSolarPanel.setColumn(6);
+//        initialSolarPanel.setYearInstalled(2010);
+//        initialSolarPanel.setMaterial(Material.POLY_SI);
+//        // Create the initial solar panel
+//        SolarPanelResult createResult = service.create(initialSolarPanel);
+//        assertTrue(createResult.isSuccess());
+//        System.out.println(createResult);
+//
+//        SolarPanel existingSolarPanel = service.findByKey("Section One", 5, 6);
+//        System.out.println(existingSolarPanel);
+
+
+        //Arrangemnet 2 - new solarpanel to replace the old object.
+        SolarPanel updatedSolarPanel = new SolarPanel();
+        int oldId = 3; //createResult.getSolarPanel().getId();
+        updatedSolarPanel.setSection("Section 20"); // Modify section
+        updatedSolarPanel.setRow(4); // Modify row
+        updatedSolarPanel.setColumn(5); // Modify column
+        updatedSolarPanel.setYearInstalled(2021); // Modify year installed
+        updatedSolarPanel.setMaterial(Material.MONO_SI); // Modify material
+
+
+        //Action
+        SolarPanelResult updateResult = service.update(oldId, updatedSolarPanel);
+        System.out.println(updateResult.getSolarPanel().getSection());
+
+        //Assertion
+        assertTrue(updateResult.isSuccess());
+
     }
 
     @Test

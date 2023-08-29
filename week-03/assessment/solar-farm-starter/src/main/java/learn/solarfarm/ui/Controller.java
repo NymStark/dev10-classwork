@@ -70,9 +70,10 @@ public class Controller {
     }
 
     private void updateSolarPanel() throws DataAccessException {
-        // TODO: grab the section, row, and column from the view.
-        // TODO: use the service to fetch a solar panel by its key (section, row, column).
-        // TODO: complete update
+//        // TODO: grab the section, row, and column from the view.
+//        // TODO: use the service to fetch a solar panel by its key (section, row, column).
+//        // TODO: complete update
+        view.displayHeader("Update a Panel");
         String section = view.getSection();
         int row = view.getRow();
         int column = view.getColumn();
@@ -83,13 +84,12 @@ public class Controller {
             view.displayMessage("Solar Panel not found for the specified key.");
             return;
         }
-        view.displayMessage("Current Solar Panel Details:"); //displaying current panel info:
-        view.displaySolarPanels(section, List.of(existingPanel));
+        int oldId = existingPanel.getId();
 
+        // Prompt the user for the updated information using the view's method
         SolarPanel updatedPanel = view.updateSolarPanel();
-        updatedPanel.setId(existingPanel.getId()); // Ensure the ID stays the same
-
-        SolarPanelResult result = service.update(updatedPanel);
+        updatedPanel.setId(oldId); // Ensure the ID stays the same
+        SolarPanelResult result = service.update(oldId, updatedPanel);
 
         if (result.isSuccess()) {
             view.displayMessage("[Success]%nPanel %s updated.", result.getSolarPanel().getKey());

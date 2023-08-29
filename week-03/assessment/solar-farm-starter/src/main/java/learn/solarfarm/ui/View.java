@@ -86,19 +86,14 @@ public class View {
     }
 
     public SolarPanel updateSolarPanel() {
-        displayHeader("Update a Panel");
+        displayHeader("Enter Updated Solar Panel Data: ");
         io.println("");
 
         SolarPanel result = new SolarPanel();
 
-        // Get section, row, and column from the view
-        String section = getSection();
-        int row = getRow();
-        int column = getColumn();
-
-        result.setSection(section);
-        result.setRow(row);
-        result.setColumn(column);
+        result.setSection(io.readRequiredString("Section"));
+        result.setRow(io.readInt("Row", 1, SolarPanelService.MAX_ROW_COLUMN));
+        result.setColumn(io.readInt("Column", 1, SolarPanelService.MAX_ROW_COLUMN));
         result.setMaterial(io.readEnum("Material", Material.class));
         result.setYearInstalled(io.readInt("Installation Year", SolarPanelService.getMaxInstallationYear()));
         result.setTracking(io.readBoolean("Tracked [y/n]"));
