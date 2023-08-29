@@ -1,0 +1,11 @@
+1~The Ridge~1~1~2020~POLY_SI~true
+2~The Ridge~1~2~2019~MONO_SI~true
+3~Flats~1~1~2017~A_SI~true
+4~Flats~2~6~2017~CD_TE~true
+5~Flats~3~7~2000~CIGS~false
+6~Purple Haze~2~3~2020~A_SI~true
+7~Purple Haze~3~4~2021~A_SI~true
+8~Purple Haze~4~4~2022~A_SI~true
+9~Purple Haze~4~5~2023~A_SI~true
+10~Cloudy Sky~1~1~2019~CIGS~false
+11~Cloudy Sky~1~2~2023~CIGS~false

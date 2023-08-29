@@ -28,6 +28,10 @@ public class SolarPanelService {
         return repository.findByKey(section, row, column);
     }
 
+    public SolarPanel findById(int id) throws DataAccessException {
+        return repository.findById(id);
+    }
+
     public SolarPanelResult create(SolarPanel solarPanel) throws DataAccessException {
         SolarPanelResult result = validate(solarPanel);
 
@@ -44,8 +48,33 @@ public class SolarPanelService {
     }
 
     // TODO: add an update method
+    public SolarPanelResult update(int oldId, SolarPanel solarPanel) throws DataAccessException {
+        SolarPanelResult result = validate(solarPanel);
+
+        if (solarPanel != null && oldId <= 0) { // checking for not null, and not 0 and below.
+            // Note: When Testing the SolarPanelServiceTest method of shouldUpdate(), I created a SolarPanel object,
+            // which then returned false when I tried to act on it because it initialize at id 0.
+            result.addErrorMessage("To update there has to be a SolarPanel id.");
+        }
+        if (result.isSuccess()) {
+            SolarPanel existingSolarPanel = repository.findById(oldId); //initializing variable existingSolarPanel to obj.
+
+            if (existingSolarPanel == null || existingSolarPanel.getId() != oldId) { //checking for if the solarPanel exists.
+                result.addErrorMessage("SolarPanel with specified key does not exist.");
+            } else {
+                 SolarPanel updatedSolarPanel = repository.update(oldId, solarPanel);
+                 result.setSolarPanel(updatedSolarPanel);
+            }
+        }
+
+        return result;
+    }
+
 
     // TODO: add a delete method (possibly deleteById?)
+    public boolean deleteById(int id) throws DataAccessException {
+        return repository.deleteById(id);
+    }
 
     private SolarPanelResult validate(SolarPanel solarPanel) throws DataAccessException {
         SolarPanelResult result = new SolarPanelResult();

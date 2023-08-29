@@ -42,8 +42,7 @@ public class Controller {
                     updateSolarPanel();
                     break;
                 case 4:
-                    // TODO: complete delete
-                    System.out.println("NOT IMPLEMENTED");
+                    deleteSolarPanel();
                     break;
             }
         }
@@ -71,10 +70,46 @@ public class Controller {
     }
 
     private void updateSolarPanel() throws DataAccessException {
+//        // TODO: grab the section, row, and column from the view.
+//        // TODO: use the service to fetch a solar panel by its key (section, row, column).
+//        // TODO: complete update
         view.displayHeader("Update a Panel");
-        // TODO: grab the section, row, and column from the view.
-        // TODO: use the service to fetch a solar panel by its key (section, row, column).
-        // TODO: complete update
+        String section = view.getSection();
+        int row = view.getRow();
+        int column = view.getColumn();
+
+        SolarPanel existingPanel = service.findByKey(section, row, column);
+
+        if (existingPanel == null) {
+            view.displayMessage("Solar Panel not found for the specified key.");
+            return;
+        }
+        int oldId = existingPanel.getId();
+
+        // Prompt the user for the updated information using the view's method
+        SolarPanel updatedPanel = view.updateSolarPanel();
+        updatedPanel.setId(oldId); // Ensure the ID stays the same
+        SolarPanelResult result = service.update(oldId, updatedPanel);
+
+        if (result.isSuccess()) {
+            view.displayMessage("[Success]%nPanel %s updated.", result.getSolarPanel().getKey());
+        } else {
+            view.displayErrors(result.getErrorMessages());
+        }
+    }
+
+
+    private void deleteSolarPanel() throws DataAccessException {
+        // Get the ID of the solar panel to delete from the view
+        int panelIdToDelete = view.deleteSolarPanel();
+
+        boolean isDeleted = service.deleteById(panelIdToDelete);
+
+        if (isDeleted) {
+            view.displayMessage("[Success] Panel with ID %d deleted.", panelIdToDelete);
+        } else {
+            view.displayMessage("Panel with ID %d not found or could not be deleted.", panelIdToDelete);
+        }
     }
 
 }

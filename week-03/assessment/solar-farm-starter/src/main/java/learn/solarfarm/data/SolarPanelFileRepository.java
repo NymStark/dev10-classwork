@@ -37,6 +37,18 @@ public class SolarPanelFileRepository implements SolarPanelRepository {
         return null;
     }
 
+    // implementing findById method.
+    @Override
+    public SolarPanel findById(int id) throws DataAccessException {
+        List<SolarPanel> all = findAll();
+        for (SolarPanel solarPanel : all) {
+            if (solarPanel.getId() == id) {
+                return solarPanel;
+            }
+        }
+        return null;
+    }
+
     @Override
     public SolarPanel create(SolarPanel solarPanel) throws DataAccessException {
         List<SolarPanel> all = findAll();
@@ -48,8 +60,47 @@ public class SolarPanelFileRepository implements SolarPanelRepository {
     }
 
     // TODO: add an update method (must match with interface)
+    // Update takes an argument of a SolarPanel object, looks for the id of that object, then update
+    @Override
+    public SolarPanel update(int oldId, SolarPanel newSolarPanel) throws DataAccessException {
+//        List<SolarPanel> all = findAll();
+//        SolarPanel existingSolarPanel = findById(oldId); //leveraging findById
+//        if (existingSolarPanel != null){
+//            newSolarPanel.setId(oldId);
+//            all.set(oldId, newSolarPanel);
+//            writeToFile(all);
+//            return newSolarPanel;
+//        }
+        // this is throwing out of bound errors while the other one is accurate, I am not sure why.
+
+        List<SolarPanel> all = findAll(); // Load all solar panels from the file.
+        for (int i = 0; i < all.size(); i++) {
+            SolarPanel sp = all.get(i); // Gets one from the list
+            newSolarPanel.setId(oldId); // sets the Id of the new solar panel
+            if (sp.getId() == oldId) { //checks if the solarPanelId is the same as the updated panel.
+                all.set(i, newSolarPanel); //replace the solar panel at index i with solarpanel object
+                writeToFile(all);//rewrite
+                return newSolarPanel;
+            }
+        }
+        return null; // If the panel with the specified ID is not found.
+    }
+
 
     // TODO: add a delete method (must match with interface)
+    @Override
+    public boolean deleteById(int id) throws DataAccessException {
+        List<SolarPanel> all = findAll();
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).getId() == id) {
+                all.remove(i); // Remove the panel with the specified ID from the list.
+                writeToFile(all);
+                return true; // Return true to indicate successful deletion.
+            }
+        }
+        return false; // Else false
+    }
+
 
     private List<SolarPanel> findAll() throws DataAccessException {
         ArrayList<SolarPanel> result = new ArrayList<>();
