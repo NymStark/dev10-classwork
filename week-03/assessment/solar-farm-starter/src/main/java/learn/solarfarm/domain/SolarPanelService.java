@@ -51,7 +51,9 @@ public class SolarPanelService {
     public SolarPanelResult update(int oldId, SolarPanel solarPanel) throws DataAccessException {
         SolarPanelResult result = validate(solarPanel);
 
-        if (solarPanel != null && oldId < 0) { // checking for not null, and not 0 and below.
+        if (solarPanel != null && oldId <= 0) { // checking for not null, and not 0 and below.
+            // Note: When Testing the SolarPanelServiceTest method of shouldUpdate(), I created a SolarPanel object,
+            // which then returned false when I tried to act on it because it initialize at id 0.
             result.addErrorMessage("To update there has to be a SolarPanel id.");
         }
         if (result.isSuccess()) {

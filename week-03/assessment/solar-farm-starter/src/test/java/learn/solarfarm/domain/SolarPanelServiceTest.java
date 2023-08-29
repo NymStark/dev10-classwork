@@ -240,47 +240,62 @@ class SolarPanelServiceTest {
     @Test
     void shouldNotUpdateEmptySection() throws DataAccessException {
        // TODO: complete
-        //Gotta practice
-//        SolarPanel solarPanel = new SolarPanel();
-//        solarPanel.setSection("Section One");
-//        solarPanel.setRow(5);
-//        solarPanel.setColumn(5);
-//        solarPanel.setYearInstalled(1920);
-//        solarPanel.setMaterial(Material.POLY_SI);
-//
-//        SolarPanelResult result = service.create(solarPanel);
-//
-//        assertTrue(result.isSuccess());
-//
-//        // Update the solar panel's section to an empty string
-//        SolarPanel updatedSolarPanel = new SolarPanel();
-//        updatedSolarPanel.setSection(""); // Set the section to an empty string.
-//        updatedSolarPanel.setRow(7);
-//        updatedSolarPanel.setColumn(7);
-//        updatedSolarPanel.setYearInstalled(2020);
-//        updatedSolarPanel.setMaterial(Material.POLY_SI);
-//
-//        // Act - Attempt to update the solar panel
-//        SolarPanelResult updateResult = service.update(updatedSolarPanel); //currently always unsuccessful.
-//        // Assert - Ensure that the update was not successful (section cannot be empty)
-//        assertFalse(updateResult.isSuccess());
-//        // Check that the error message mentions the section field
-//        assertTrue(updateResult.getErrorMessages().get(0).contains("`section`"));
+        SolarPanel updatedSolarPanel = new SolarPanel();
+        updatedSolarPanel.setSection(""); // Modify section to null
+        updatedSolarPanel.setRow(4); // Modify row
+        updatedSolarPanel.setColumn(5); // Modify column
+        updatedSolarPanel.setYearInstalled(2021); // Modify year installed
+        updatedSolarPanel.setMaterial(Material.MONO_SI); // Modify material
+
+        SolarPanelResult result = service.update(3, updatedSolarPanel);
+
+        assertFalse(result.isSuccess());
+        assertEquals(1, result.getErrorMessages().size());
+        assertTrue(result.getErrorMessages().get(0).contains("`section`"));
+
     }
 
     @Test
     void shouldNotUpdateNonPositiveId() throws DataAccessException {
-        // TODO: complete
+        // TODO: complete - OK
+        SolarPanel solarPanel = service.findById(3);
+        solarPanel.setId(0);
+        SolarPanel updatedSolarPanel = new SolarPanel();
+        updatedSolarPanel.setSection("20"); // Modify section to null
+        updatedSolarPanel.setRow(4); // Modify row
+        updatedSolarPanel.setColumn(5); // Modify column
+        updatedSolarPanel.setYearInstalled(2021); // Modify year installed
+        updatedSolarPanel.setMaterial(Material.MONO_SI); // Modify material
+
+        SolarPanelResult result = service.update(0, updatedSolarPanel);
+
+        assertFalse(result.isSuccess());
+        assertEquals(1, result.getErrorMessages().size());
+        assertTrue(result.getErrorMessages().get(0).contains("id"));
+
     }
 
     @Test
     void shouldNotUpdateNonExistentSolarPanel() throws DataAccessException {
-        // TODO: complete
+        // TODO: complete - OK
+        SolarPanel solarPanel = service.findById(4);
+        SolarPanel updatedSolarPanel = new SolarPanel();
+        updatedSolarPanel.setSection("20"); // Modify section to null
+        updatedSolarPanel.setRow(4); // Modify row
+        updatedSolarPanel.setColumn(5); // Modify column
+        updatedSolarPanel.setYearInstalled(2021); // Modify year installed
+        updatedSolarPanel.setMaterial(Material.MONO_SI); // Modify material
+
+        SolarPanelResult result = service.update(4, updatedSolarPanel);
+
+        assertFalse(result.isSuccess());
+        assertTrue(result.getErrorMessages().get(0).contains("does not exist"));
+
     }
 
     @Test
     void shouldUpdate() throws DataAccessException {
-        // TODO: complete
+        // TODO: complete - OK
 
         //Arrangement 1 - create an object in the system to access its id
 //        SolarPanel initialSolarPanel = new SolarPanel();
@@ -299,6 +314,8 @@ class SolarPanelServiceTest {
 
 
         //Arrangemnet 2 - new solarpanel to replace the old object.
+        // Note: Do NOT need to arrange for create, there's already populated dummy data in RepositoryDouble in the form of an ArrayList<>
+
         SolarPanel updatedSolarPanel = new SolarPanel();
         int oldId = 3; //createResult.getSolarPanel().getId();
         updatedSolarPanel.setSection("Section 20"); // Modify section
@@ -320,10 +337,22 @@ class SolarPanelServiceTest {
     @Test
     void shouldNotDeleteNonExistentSolarPanel() throws DataAccessException {
         // TODO: complete
+        int id = 1203; //nonexistent id
+        boolean result = service.deleteById(id);
+        assertFalse(result);
     }
 
     @Test
     void shouldDelete() throws DataAccessException {
         // TODO: complete
+        //Arrange
+        int id = 2;
+        //Act
+        boolean result = service.deleteById(id);
+        //Assert
+        assertTrue(result);
+
+        SolarPanel deleted = service.findById(id);
+        assertNull(deleted);
     }
 }

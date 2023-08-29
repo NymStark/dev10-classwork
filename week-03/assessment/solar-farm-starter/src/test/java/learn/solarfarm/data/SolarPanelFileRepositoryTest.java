@@ -12,8 +12,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SolarPanelFileRepositoryTest {
     static final String SEED_FILE_PATH = "./data/solarfarm-seed.txt";
@@ -81,6 +80,24 @@ class SolarPanelFileRepositoryTest {
     }
 
     @Test
+    void findById() throws DataAccessException {
+        //Arrange
+        SolarPanel expected = new SolarPanel(1, "The Ridge", 1, 1, 2020, Material.POLY_SI, true);
+
+        //Act: test that an existing solar panel can be retrieved
+        SolarPanel actual = repository.findById(1);
+        //Assert
+        assertEquals(expected, actual);
+
+        //Act: test that attempting to retrieve a non-existent solar panel returns null
+        actual = repository.findById(1000);
+        //Assert
+        assertNull(actual);
+
+
+    }
+
+    @Test
     void create() throws DataAccessException {
         // Arrange
         SolarPanel solarPanel = new SolarPanel();
@@ -112,10 +129,32 @@ class SolarPanelFileRepositoryTest {
     @Test
     void update() throws DataAccessException {
         // TODO: complete
+        // Arrange
+        SolarPanel updatedPanel = new SolarPanel(1, "The Ridge", 1, 1, 2021, Material.MONO_SI, false);
+
+        // Act: Update the existing solar panel
+        SolarPanel expected = repository.update(1, updatedPanel);
+        SolarPanel actual = repository.findById(1);
+
+        // Assert: Check that the solar panel has been updated
+        assertEquals(expected, actual);
+        // There's probably more to test, but I'm drawing a blank.
     }
 
     @Test
     void deleteById() throws DataAccessException {
         // TODO: complete
+        // Arrange: Identify an existing solar panel ID
+
+        int existingId = 2;
+        // Act: Delete the solar panel by ID
+        boolean isDeleted = repository.deleteById(existingId);
+        // Assert
+        assertTrue(isDeleted);
+
+        // Act: Attempt to retrieve the deleted solar panel
+        SolarPanel actual = repository.findById(existingId);
+        // Assert: Check that the retrieved solar panel is now null (deleted)
+        assertNull(actual);
     }
 }

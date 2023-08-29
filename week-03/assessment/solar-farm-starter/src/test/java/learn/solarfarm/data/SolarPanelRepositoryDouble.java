@@ -61,6 +61,13 @@ public class SolarPanelRepositoryDouble implements SolarPanelRepository {
     // TODO: add a delete method (must match with interface)
     @Override
     public boolean deleteById(int id) throws DataAccessException {
+        //straight up implementing it should work, but I'm very curious of how to implement the test "short cut", the same manner as update and create.
+//        if (findById(id) != null) {
+//            solarPanels.remove(findById(id));
+//            return true;
+//        }
+//        Maybe something like that?
+
         SolarPanel panelToRemove = null;
         for (SolarPanel sp : solarPanels) {
             if (sp.getId() == id) {
@@ -73,7 +80,7 @@ public class SolarPanelRepositoryDouble implements SolarPanelRepository {
             return true; // Panel successfully deleted.
         }
 
-        return false; //placeholder
+        return false;
     }
 
 
