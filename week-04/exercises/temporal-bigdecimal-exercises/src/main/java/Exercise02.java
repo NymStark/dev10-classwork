@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -11,17 +12,19 @@ public class Exercise02 {
 
     // 1. return the current date and time as a LocalDateTime
     LocalDateTime getNow() {
-        return null;
+        return LocalDateTime.now();
     }
 
     // 2. return the current date and 4PM (tea time!) as a LocalDateTime.
     LocalDateTime getTeaTime() {
-        return null;
+        LocalDate currentDate = LocalDate.now();
+        LocalTime teaTime = LocalTime.of(16, 0); // 4 PM
+        return currentDate.atTime(teaTime);
     }
 
     // 3. add 12 hours to the LocalDateTime parameter and return the value
     LocalDateTime add12Hours(LocalDateTime dateTime) {
-        return null;
+        return dateTime.plusHours(12);
     }
 
     // 4. given a LocalDateTime parameter, return a list of the next 4

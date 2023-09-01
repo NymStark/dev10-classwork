@@ -78,7 +78,7 @@ public class SolarPanelFileRepository implements SolarPanelRepository {
             SolarPanel sp = all.get(i); // Gets one from the list
             newSolarPanel.setId(oldId); // sets the Id of the new solar panel
             if (sp.getId() == oldId) { //checks if the solarPanelId is the same as the updated panel.
-                all.set(i, newSolarPanel); //replace the solar panel at index i with solarpanel object
+                all.set(i, newSolarPanel); //replace the solar panel at index i with solarpanel object, done by the set(index, element) method of ArrayList<>();
                 writeToFile(all);//rewrite
                 return newSolarPanel;
             }
