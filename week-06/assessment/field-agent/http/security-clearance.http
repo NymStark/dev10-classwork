@@ -1,0 +1,35 @@
+@url = http://localhost:8080/api/security-clearance
+
+# Retrieve all Security Clearances (GET)
+GET {{url}} HTTP/1.1
+
+###
+
+# Retrieve a Security Clearance by ID (GET)
+GET {{url}}/1 HTTP/1.1
+
+###
+
+# Add a new Security Clearance (POST)
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Tops"
+}
+
+###
+
+# Update a Security Clearance by ID (PUT)
+PUT {{url}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "securityClearanceId": 1,
+    "name": "Con"
+}
+
+###
+
+# Delete a Security Clearance by ID (DELETE)
+DELETE {{url}}/5 HTTP/1.1
