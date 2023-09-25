@@ -15,7 +15,10 @@ function changeView(view) {
 
 // TODO: Populate an existing agent into the HTML form.
 function showUpdate() {
-    alert("Implement update!");
+
+    //1. Retrieve Agent Data - fetch from API
+    //2. 
+    //alert("Implement update!");
 }
 
 // TODO: Populate an existing agent into a delete confirmation view. 
