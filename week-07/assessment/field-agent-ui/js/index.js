@@ -13,6 +13,10 @@ function changeView(view) {
     currentView = view;
 }
 
+/*
+COMMENTING OUT THE PREVIOUS CODEBLOCKS AND WORKING ON NEW ONES, BECAUSE I KEEP BREAKING CODES.
+*/
+
 // TODO: Populate an existing agent into the HTML form.
 // function showUpdate() {
 
@@ -28,11 +32,11 @@ function showUpdate(agentId) {
             } else {
                 console.error('Failed to fetch agent data for update');
             }
-        })
+        }) 
         .then(agent => {
             document.getElementById("agentId").value = agent.agentId;
             document.getElementById("firstName").value = agent.firstName;
-            document.getElementById("middleName").value = agent.middleName || "";
+            document.getElementById("middleName").value = agent.middleName || ""; //middle name can be null
             document.getElementById("lastName").value = agent.lastName;
             document.getElementById("dob").value = agent.dob;
             document.getElementById("heightInInches").value = agent.heightInInches;
@@ -52,17 +56,14 @@ function confirmDelete(agentId) {
     const confirmDeletion = confirm(`Are you sure you want to delete the agent with ID: ${agentId}?`);
     
     if (confirmDeletion) {
-        // If the user confirms the deletion, send a DELETE request to the API.
+        // Delete Requests to the API.
         fetch(`http://localhost:8080/api/agent/${agentId}`, {
             method: 'DELETE'
         })
         .then(response => {
-            if (response.ok) {
-                // Successful deletion, you can take appropriate action here.
-                // For example, you may refresh the agent list.
+            if (response.ok) { //Action upon successful deletion
                 showList();
             } else {
-
                 console.error('Failed to delete agent');
             }
         })
@@ -70,7 +71,6 @@ function confirmDelete(agentId) {
             console.error(error);
         });
     }
-    
    // alert(`Implement delete! Agent ID: ${agentId}`);
 }
 
