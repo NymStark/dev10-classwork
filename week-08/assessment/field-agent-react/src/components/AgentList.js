@@ -21,7 +21,7 @@ function AgentList() {
 
     return (
         <>
-            {agents.length == 0 ?
+            {agents.length === 0 ? // === instead of ==
                 <div className="alert alert-warning py-4">
                     No agents found.<br />
                     Do you want to add an agent?
