@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; // Import the useParams hook
+import { useParams, useNavigate } from "react-router-dom"; // Import the useParams hook
 
 
 // TODO: Modify this component to support update/edit.
 // An update URL should have an agent id.
 // Use that id to fetch a single agent and populate it in the form.
 
-function AgentForm({ setView }) {
+function AgentForm() {
     const { id } = useParams(); // Get the id parameter from the URL using useParams
+    const nav = useNavigate();
 
     const [agent, setAgent] = useState({
         firstName: "",
@@ -34,18 +35,17 @@ function AgentForm({ setView }) {
                 })
                 .catch((error) => {
                     console.error(error);
+
                 });
         }
     }, [id]); // This effect will re-run whenever the id changes
 
     function handleChange(evt) {
-
         setAgent(previous => {
             const next = { ...previous };
             next[evt.target.name] = evt.target.value;
             return next;
         });
-
     }
 
     // TODO: Modify this function to support update as well as add/create.
@@ -97,7 +97,7 @@ function AgentForm({ setView }) {
         fetch(apiUrl, config)
             .then((response) => {
                 if (response.ok) {
-                    setView("list");
+                    nav("/list"); 
                 } else {
                     return response.json();
                 }
@@ -115,7 +115,7 @@ function AgentForm({ setView }) {
 
 
     function handleCancel() {
-        setView("list");
+        nav("/list");
     }
 
     return (

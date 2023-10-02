@@ -44,6 +44,10 @@ function Nav() {
                     {/* Add a placeholder link for "Agencies" */}
                     <Link to="/agencies" className="nav-link">Agencies</Link>
                 </li>
+                <li className="nav-item">
+                    {/* Use Link component to navigate to the "/" route */}
+                    <Link to="/" className="nav-link">Home</Link>
+                </li>
             </ul>
             {/* The "Add Agent" button navigates to the "form" route */}
             <div className="d-flex flex-grow-1 justify-content-end">
