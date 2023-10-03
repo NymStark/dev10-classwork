@@ -8,11 +8,11 @@ import Nav from "./components/Nav";
 import ConfirmDelete from './components/ConfirmDelete';
 import NotFound from "./components/NotFound";
 
-const componentMap = {
-  "form": AgentForm,
-  "list": AgentList,
-  "landing": Landing
-}
+// const componentMap = {
+//   "form": AgentForm,
+//   "list": AgentList,
+//   "landing": Landing
+// }
 
 function App() {
 
@@ -35,17 +35,17 @@ function App() {
   //   </main>
   // );
 
-  const [view, setView] = useState("landing");
-  const Component = componentMap[view];
+  // const [view, setView] = useState("landing");
+  // const Component = componentMap[view];
   return (
     <main className="container">
       <Nav />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/list" element={<AgentList />} />
-        <Route path="/form" element={<AgentForm setView={setView}/>} />
+        <Route path="/form" element={<AgentForm />} />
         <Route path="/agents">
-          <Route path="edit/:id" element={<AgentForm setView={setView}/>} />
+          <Route path="edit/:id" element={<AgentForm/>} />
           <Route path="delete/:id" element={<ConfirmDelete />} />
         </Route>
         <Route path="*" element={<NotFound />} />
